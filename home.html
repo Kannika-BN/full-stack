@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Auth App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container home-container">
+        <div class="welcome-emoji">🎉</div>
+        <h1>Welcome Home!</h1>
+        <p class="subtitle">You have logged in successfully</p>
+        
+        <div class="user-info">
+            <p>Logged in as: <span id="userEmail" class="user-email">Loading...</span></p>
+        </div>
+
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Check auth and display user info
+        async function initHome() {
+            const userData = await checkAuthStatus();
+            if (userData) {
+                document.getElementById('userEmail').textContent = userData.email;
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
+        });
+
+        initHome();
+    </script>
+</body>
+</html>
